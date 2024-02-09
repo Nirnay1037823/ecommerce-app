@@ -75,8 +75,8 @@ public class CategoryController {
         }
     }
 
-//    @PostMapping("/getbyfield")
-//    public ResponseEntity<Category> getCategoryByField(@RequestBody Category category){
+//    @PostMapping("/getByField")
+//    public ResponseEntity<Category> getCategoryByField(@RequestBody String key, String value){
 //
 //    }
 }
