@@ -27,7 +27,7 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.CREATED).body(savedProduct);
     }
 
-    @PostMapping("/{id}")
+    @PostMapping("/delete/{id}")
     public ResponseEntity<String> deleteProduct(@PathVariable int id) {
         try {
             if (productService.productExistsById(id)) {

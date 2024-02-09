@@ -24,4 +24,24 @@ public class CategoryService {
     public boolean categoryExistsById(int id){
         return categoryRepo.existsById(id);
     }
+
+    public void deleteById(int id){
+        categoryRepo.deleteById(id);
+    }
+
+    public void updateCategoryById(int id, Category updateCategoryData){
+        Category existingCategory = categoryRepo.getCategoryById(id);
+
+        String updateCategoryDataName = updateCategoryData.getName();
+        if(updateCategoryDataName != null){
+            existingCategory.setName(updateCategoryDataName);
+        }
+
+        String updateCategoryDataDescription = updateCategoryData.getDescription();
+        if(updateCategoryDataDescription!=null){
+            existingCategory.setDescription(updateCategoryDataDescription);
+        }
+
+        categoryRepo.save(existingCategory);
+    }
 }
