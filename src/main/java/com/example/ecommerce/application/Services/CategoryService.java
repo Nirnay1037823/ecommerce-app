@@ -42,6 +42,23 @@ public class CategoryService {
             existingCategory.setDescription(updateCategoryDataDescription);
         }
 
+        List<Product> updateCategoryDataProductList = updateCategoryData.getProductList();
+        if(!updateCategoryDataProductList.isEmpty()){
+            existingCategory.setProductList(updateCategoryDataProductList);
+        }
+
+        categoryRepo.save(existingCategory);
+    }
+
+    public void linkCategoryWithProduct(int id, List<Product> newProducts){
+        Category existingCategory = categoryRepo.getCategoryById(id);
+
+        List<Product> existingCategoryProductList = existingCategory.getProductList();
+
+        existingCategoryProductList.addAll(newProducts);
+
+        existingCategory.setProductList(existingCategoryProductList);
+
         categoryRepo.save(existingCategory);
     }
 }

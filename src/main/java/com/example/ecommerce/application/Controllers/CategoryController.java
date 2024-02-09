@@ -1,6 +1,7 @@
 package com.example.ecommerce.application.Controllers;
 
 import com.example.ecommerce.application.Model.Category;
+import com.example.ecommerce.application.Model.Product;
 import com.example.ecommerce.application.Services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -58,4 +59,24 @@ public class CategoryController {
                     .body("{\"message\":\"Error occurred while updating category\"}");
         }
     }
+    @PostMapping("/products-with-category/{id}")
+    public ResponseEntity<String> linkProductWithCategory(@PathVariable int id,@RequestBody List<Product> products){
+        try {
+            if(categoryService.categoryExistsById(id)){
+                categoryService.linkCategoryWithProduct(id, products);
+                return ResponseEntity.ok()
+                        .body("{\"message\":\"Successfully updated category\",\"id\":\"" + id + "\"}");
+            }
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("{\"message\":\"No category found with \",\"id\":\"" + id + "\"}");
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("{\"message\":\"Error occurred while updating category\"}");
+        }
+    }
+
+//    @PostMapping("/getbyfield")
+//    public ResponseEntity<Category> getCategoryByField(@RequestBody Category category){
+//
+//    }
 }
