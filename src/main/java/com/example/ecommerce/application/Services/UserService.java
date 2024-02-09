@@ -10,8 +10,16 @@ import java.util.Optional;
 
 @Service
 public class UserService {
-    @Autowired
+
     private UserRepository userRepo;
+
+    private TokenService tokenService;
+
+    @Autowired
+    public UserService(UserRepository userRepo, TokenService tokenService) {
+        this.userRepo = userRepo;
+        this.tokenService = tokenService;
+    }
 
     public User userSignUp(User user){
         return userRepo.save(user);
@@ -35,7 +43,7 @@ public class UserService {
                         "\"message\":"+"Successfully Logged in\",\n"+
                         "\"data\": "+user+",\n"+
                         "\"Email: " + user.getEmail() + "\n"+
-//                        "\"token: " + tokenService.createToken(user.getId()) +
+                        "\"token: " + tokenService.createToken(user.getId()) +
                         "}";
             }
         }
