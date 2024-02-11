@@ -62,7 +62,7 @@ public class CategoryService {
         categoryRepo.save(existingCategory);
     }
 
-    public List<Category> findCategoryByField(String key, String value){
-        return categoryRepo.getCategoryByField(key,value);
-    }
+//    public List<Category> findCategoryByField(String key, String value){
+//        return categoryRepo.getCategoryByField(key,value);
+//    }
 }

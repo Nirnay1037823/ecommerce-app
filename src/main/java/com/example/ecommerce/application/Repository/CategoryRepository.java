@@ -11,6 +11,6 @@ public interface CategoryRepository extends JpaRepository<Category, Integer> {
     @Query(value = "SELECT u FROM Category u WHERE u.id = :id")
     Category getCategoryById(int id);
 
-    @Query(value = "SELECT u FROM Category u WHERE u.key = :value")
-    List<Category> getCategoryByField(String key, String value);
+//    @Query(value = "SELECT u FROM Category u WHERE u.key = :value")
+//    List<Category> getCategoryByField(String key, String value);
 }

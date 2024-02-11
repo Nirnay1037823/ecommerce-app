@@ -16,7 +16,7 @@ public class CategoryController {
     @Autowired
     CategoryService categoryService;
 
-    @GetMapping("/")
+    @GetMapping("/get-all")
     public ResponseEntity<List<Category>> getAllCategories() {
         List<Category> category = categoryService.getAllCategory();
         return ResponseEntity.ok().body(category);
@@ -76,7 +76,13 @@ public class CategoryController {
     }
 
 //    @PostMapping("/getByField")
-//    public ResponseEntity<Category> getCategoryByField(@RequestBody String key, String value){
-//
+//    public ResponseEntity<String> getCategoryByField(@RequestBody String key, String value){
+//        try{
+//            List<Category> resultCategory = categoryService.findCategoryByField(key,value);
+//            return ResponseEntity.ok().body(resultCategory.toString());
+//        }catch (Exception e){
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+//                    .body("{\"message\":\"Error occurred while deleting category\"}");
+//        }
 //    }
 }
