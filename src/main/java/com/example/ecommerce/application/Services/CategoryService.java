@@ -3,6 +3,7 @@ package com.example.ecommerce.application.Services;
 import com.example.ecommerce.application.Model.Category;
 import com.example.ecommerce.application.Model.Product;
 import com.example.ecommerce.application.Repository.CategoryRepository;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,15 +22,15 @@ public class CategoryService {
         return categoryRepo.findAll();
     }
 
-    public boolean categoryExistsById(int id){
+    public boolean categoryExistsById(ObjectId id){
         return categoryRepo.existsById(id);
     }
 
-    public void deleteById(int id){
+    public void deleteById(ObjectId id){
         categoryRepo.deleteById(id);
     }
 
-    public void updateCategoryById(int id, Category updateCategoryData){
+    public void updateCategoryById(ObjectId id, Category updateCategoryData){
         Category existingCategory = categoryRepo.getCategoryById(id);
 
         String updateCategoryDataName = updateCategoryData.getName();
@@ -50,7 +51,7 @@ public class CategoryService {
         categoryRepo.save(existingCategory);
     }
 
-    public void linkCategoryWithProduct(int id, List<Product> newProducts){
+    public void linkCategoryWithProduct(ObjectId id, List<Product> newProducts){
         Category existingCategory = categoryRepo.getCategoryById(id);
 
         List<Product> existingCategoryProductList = existingCategory.getProductList();

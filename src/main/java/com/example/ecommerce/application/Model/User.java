@@ -1,28 +1,28 @@
 package com.example.ecommerce.application.Model;
 
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.bson.types.ObjectId;
 
 @Data
-@Entity
-@Table(name = "ecommerce_user")
+@AllArgsConstructor
+@NoArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class User {
 
-    @Id
-    @GeneratedValue
-    @Column(name = "user_id")
-    private int id;
+    @JsonSerialize(using = ToStringSerializer.class)
+    private ObjectId id;
 
-    @Column(name = "user_name", unique = true)
     private String name;
 
-    @Column(name = "user_password1")
     private String password1;
 
 
-    @Column(name = "user_password2")
     private String password2;
 
-    @Column(name = "user_email")
     private String email;
 }

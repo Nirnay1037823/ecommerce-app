@@ -5,6 +5,7 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
 
 import java.io.UnsupportedEncodingException;
@@ -13,7 +14,7 @@ import java.util.Date;
 @Service
 public class TokenService {
     public static final String token_secret = "hellohihowareyouimfine";
-    public String createToken(Integer id){
+    public String createToken(ObjectId id){
         try{
             Algorithm algoObj = Algorithm.HMAC256(token_secret);
             String token = JWT.

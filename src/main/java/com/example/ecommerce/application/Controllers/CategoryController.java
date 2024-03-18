@@ -3,6 +3,7 @@ package com.example.ecommerce.application.Controllers;
 import com.example.ecommerce.application.Model.Category;
 import com.example.ecommerce.application.Model.Product;
 import com.example.ecommerce.application.Services.CategoryService;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/category")
+@CrossOrigin(origins ="*",allowedHeaders = "*")
 public class CategoryController {
     @Autowired
     CategoryService categoryService;
@@ -29,7 +31,7 @@ public class CategoryController {
     }
 
     @PostMapping("/delete/{id}")
-    public ResponseEntity<String> deleteCategory(@PathVariable int id) {
+    public ResponseEntity<String> deleteCategory(@PathVariable ObjectId id) {
         try {
             if (categoryService.categoryExistsById(id)) {
                 categoryService.deleteById(id);
@@ -45,7 +47,7 @@ public class CategoryController {
     }
 
     @PostMapping("/update/{id}")
-    public ResponseEntity<String> updateCategory(@PathVariable int id,@RequestBody Category category){
+    public ResponseEntity<String> updateCategory(@PathVariable ObjectId id,@RequestBody Category category){
         try {
             if(categoryService.categoryExistsById(id)){
                 categoryService.updateCategoryById(id, category);
@@ -60,7 +62,7 @@ public class CategoryController {
         }
     }
     @PostMapping("/products-with-category/{id}")
-    public ResponseEntity<String> linkProductWithCategory(@PathVariable int id,@RequestBody List<Product> products){
+    public ResponseEntity<String> linkProductWithCategory(@PathVariable ObjectId id,@RequestBody List<Product> products){
         try {
             if(categoryService.categoryExistsById(id)){
                 categoryService.linkCategoryWithProduct(id, products);

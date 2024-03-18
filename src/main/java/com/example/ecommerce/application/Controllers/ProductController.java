@@ -2,6 +2,7 @@ package com.example.ecommerce.application.Controllers;
 
 import com.example.ecommerce.application.Model.Product;
 import com.example.ecommerce.application.Services.ProductService;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/products")
+@CrossOrigin(origins ="*",allowedHeaders = "*")
 public class ProductController {
     @Autowired
     ProductService productService;
@@ -28,7 +30,7 @@ public class ProductController {
     }
 
     @PostMapping("/delete/{id}")
-    public ResponseEntity<String> deleteProduct(@PathVariable int id) {
+    public ResponseEntity<String> deleteProduct(@PathVariable ObjectId id) {
         try {
             if (productService.productExistsById(id)) {
                 productService.deleteById(id);
@@ -44,7 +46,7 @@ public class ProductController {
     }
 
     @PostMapping("/update/{id}")
-    public ResponseEntity<String> updateProduct(@PathVariable int id,@RequestBody Product product){
+    public ResponseEntity<String> updateProduct(@PathVariable ObjectId id, @RequestBody Product product){
         try {
             if(productService.productExistsById(id)){
                 productService.updateProductById(id, product);

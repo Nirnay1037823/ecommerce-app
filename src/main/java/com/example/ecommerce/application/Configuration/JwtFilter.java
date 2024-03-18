@@ -7,6 +7,7 @@ import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.bson.types.ObjectId;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.filter.GenericFilterBean;
 
@@ -35,7 +36,7 @@ public class JwtFilter extends GenericFilterBean {
             filterChain.doFilter(req,res);
         }
         else {
-            Integer userId = new Integer(tokenService.getUserIdToken(token));
+            ObjectId userId = new ObjectId(tokenService.getUserIdToken(token));
             httpServletRequest.setAttribute("userId", userId);
             filterChain.doFilter(req,res);
         }
@@ -43,7 +44,9 @@ public class JwtFilter extends GenericFilterBean {
     public boolean allowRequestWithoutToken(HttpServletRequest httpServletRequest) {
         System.out.println(httpServletRequest.getRequestURI());
         String requestURI = httpServletRequest.getRequestURI();
-        if (requestURI.contains("/user") || requestURI.equals("/api/v1/products/get-all") || requestURI.equals("/api/v1/category/get-all")) {
+        if (requestURI.contains("/user")
+                || requestURI.equals("/api/v1/products/get-all")
+                || requestURI.equals("/api/v1/category/get-all")) {
             return true;
         }
         return false;

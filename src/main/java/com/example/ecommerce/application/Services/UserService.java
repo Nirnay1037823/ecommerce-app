@@ -38,17 +38,17 @@ public class UserService {
         if(userExistsByUsername(userName)){
             User user = userRepo.getUserByUsername(userName);
             String userPass = user.getPassword1();
-            if(userPass.equals(inputPassword)){
+
+            if (userPass.equals(inputPassword)) {
                 return "{" +
-                        "\"message\":"+"Successfully Logged in\",\n"+
-                        "\"data\": "+user+",\n"+
-                        "\"Email: " + user.getEmail() + "\n"+
-                        "\"token: " + tokenService.createToken(user.getId()) +
+                        "\"message\": \"Successfully Logged in\"," +
+                        "\"Email\": \"" + user.getEmail() + "\"," +
+                        "\"token\": \"" + tokenService.createToken(user.getId()) + "\"" +
                         "}";
             }
         }
         return "{" +
-                "\"message\":"+"Authentication Failed\",\n"+
+                "\"message\": \"Authentication Failed\"" +
                 "}";
     }
 }

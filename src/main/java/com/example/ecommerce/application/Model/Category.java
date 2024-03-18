@@ -1,27 +1,29 @@
 package com.example.ecommerce.application.Model;
 
 
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
 @Data
-@Table(name = "ecommerce_category")
+@AllArgsConstructor
+@NoArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Category {
-    @Id
-    @GeneratedValue
-    @Column(name = "category_id")
-    private int id;
 
-    @Column(name = "category_name")
+    @JsonSerialize(using = ToStringSerializer.class)
+    private ObjectId id;
+
     private String name;
 
-    @Column(name = "category_description")
     private String description;
 
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<Product> productList = new ArrayList<>();
 }

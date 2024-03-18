@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/user")
+@CrossOrigin(origins ="*",allowedHeaders = "*")
 public class UserController {
     @Autowired
     private UserService userService;

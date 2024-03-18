@@ -2,6 +2,7 @@ package com.example.ecommerce.application.Services;
 
 import com.example.ecommerce.application.Model.Product;
 import com.example.ecommerce.application.Repository.ProductRepository;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,15 +22,15 @@ public class ProductService {
         return prodRepo.findAll();
     }
 
-    public boolean productExistsById(int id){
+    public boolean productExistsById(ObjectId id){
         return prodRepo.existsById(id);
     }
 
-    public void deleteById(int id){
+    public void deleteById(ObjectId id){
         prodRepo.deleteById(id);
     }
 
-    public void updateProductById(int id, Product updateProductData){
+    public void updateProductById(ObjectId id, Product updateProductData){
         Product existingProduct = prodRepo.getProductById(id);
 
         String updateProductName = updateProductData.getName();

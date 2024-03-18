@@ -1,25 +1,26 @@
 package com.example.ecommerce.application.Model;
 
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.bson.types.ObjectId;
 
-@Entity
 @Data
-@Table(name = "ecommerce_product")
+@AllArgsConstructor
+@NoArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Product {
 
-    @Id
-    @GeneratedValue
-    @Column(name = "product_id")
-    private int id;
+    @JsonSerialize(using = ToStringSerializer.class)
+    private ObjectId id;
 
-    @Column(name = "product_name")
     private String name;
 
-    @Column(name = "product_price")
     private int price;
 
-    @Column(name = "product_description")
     private String description;
 
 }
