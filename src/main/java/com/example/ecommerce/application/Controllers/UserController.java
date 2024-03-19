@@ -37,6 +37,7 @@ public class UserController {
     public ResponseEntity<String> login(@RequestBody User user){
         try {
             String loggedInUser = userService.userLogin(user.getName(), user.getPassword1());
+            System.out.println(loggedInUser);
             if (loggedInUser != null) {
                 return ResponseEntity.ok(loggedInUser);
             } else {
